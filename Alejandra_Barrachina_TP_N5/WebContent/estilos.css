@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+
+a {
+	
+	text-decoration:none;
+	color:white;
+}
+
+ul li {
+	
+	list-style:none;
+	width:30%;
+	padding:10px;
+	display:block;
+	float:left;
+	clear:right;
+	background-color:pink;
+	text-align:center;
+	
+}
+
+nav {
+	
+	width:100%;
+	
+}
+
+h1{
+	
+	text-align:center;
+}
