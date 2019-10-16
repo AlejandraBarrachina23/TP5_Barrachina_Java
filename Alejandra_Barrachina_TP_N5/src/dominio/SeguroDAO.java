@@ -10,12 +10,11 @@ import com.mysql.cj.xdevapi.Statement;
 
 public class SeguroDAO {
 
-	private String host = "jdbc:mysql://localhost:3306/";
+	private String host = "jdbc:mysql://localhost:3306/";  
 	private String user = "root";
 	private String password = "";
-	private String dbName = "segurosgroup";
+	private String dbName = "segurosgroup?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	Connection Conexion = null;
-	
 	
 	public Connection ConectarBaseDatos() {
 		
@@ -53,6 +52,19 @@ public class SeguroDAO {
 		return ListadoTipoSeguro;
 	}
 	
+	public int NuevoId() throws SQLException {
+		
+		 String Consulta = "SELECT COUNT(*) FROM seguros";
+		 int CantidadFilas = 1;
+		 java.sql.Statement EstablecerConsulta = ((java.sql.Connection) ConectarBaseDatos()).createStatement();
+		 ResultSet TablaResultados = EstablecerConsulta.executeQuery(Consulta);		
+		 if(TablaResultados.next()) {
+		       
+		        CantidadFilas= TablaResultados.getInt(1);
+		     }
+		 return CantidadFilas+1;
+	}
+	
 
 	public void AgregarSeguro(Seguro unNuevoSeguro) {
 		
@@ -62,8 +74,9 @@ public class SeguroDAO {
 			  StoredProcedureAgregarMascota.setString(1,unNuevoSeguro.getDescripcion());
 			  StoredProcedureAgregarMascota.setDouble(2,unNuevoSeguro.getCostoContratacion());
 			  StoredProcedureAgregarMascota.setDouble(3,unNuevoSeguro.getCostoAsegurado());
-			  StoredProcedureAgregarMascota.setInt(4,unNuevoSeguro.getIdTipo());
+			  StoredProcedureAgregarMascota.setInt(4,unNuevoSeguro.getTipoSeguro().getIdTipo());
 			  StoredProcedureAgregarMascota.execute();
+
 		} 
 		
 		catch (Exception e) {
@@ -89,21 +102,60 @@ public class SeguroDAO {
 	return ListadoTipoSeguro;
 	
 	}
+
 	
+
+public ArrayList<Seguro> ListarSeguros() throws SQLException {
+		
+		ArrayList<Seguro> ListadoSeguros = new ArrayList<Seguro>();
+	    String Consulta = "SELECT * FROM Seguros INNER JOIN TipoSeguros ON Seguros.idTipo = TipoSeguros.idTipo";
+	    java.sql.Statement EstablecerConsulta = ConectarBaseDatos().createStatement();
+	    ResultSet TablaResultados = EstablecerConsulta.executeQuery(Consulta);		
+		
+		while(TablaResultados.next()) {
+			
+			Seguro unSeguro = new Seguro();
+			TipoSeguro unTipoSeguro = new TipoSeguro();
+			
+			unSeguro.setIdSeguro(TablaResultados.getInt("idSeguro"));
+			unSeguro.setDescripcion(TablaResultados.getString("seguros.descripcion"));
+			unTipoSeguro.setIdTipo(TablaResultados.getInt("TipoSeguros.idTipo"));
+			unTipoSeguro.setDescripcion(TablaResultados.getString("TipoSeguros.descripcion"));
+			unSeguro.setTipoSeguro(unTipoSeguro);
+			unSeguro.setCostoContratacion(TablaResultados.getDouble("costoContratacion"));
+			unSeguro.setCostoAsegurado(TablaResultados.getDouble("costoAsegurado"));
+			ListadoSeguros.add(unSeguro);
+		}
+		
+	return ListadoSeguros;
 	
-	
-/*	
-	public void EliminarMascota(Mascota MascotaEliminar) throws SQLException {
-			  
-		  CallableStatement StoredProcedureEliminarMascota = ConectarBaseDatos().prepareCall("CALL EliminarMascota(?)");
-		  StoredProcedureEliminarMascota.setInt(1,MascotaEliminar.getID());
-		  StoredProcedureEliminarMascota.execute(); 
 	}
-	 
-	
-	
-	
 
-	*/
 
+public ArrayList<Seguro> ListarSegurosPorTipo(int CodigoTipo) throws SQLException {
+	
+	ArrayList<Seguro> ListadoSeguros = new ArrayList<Seguro>();
+    String Consulta = "SELECT * FROM Seguros INNER JOIN TipoSeguros ON Seguros.idTipo = TipoSeguros.idTipo WHERE Seguros.idTipo = " + CodigoTipo;
+    java.sql.Statement EstablecerConsulta = ConectarBaseDatos().createStatement();
+    ResultSet TablaResultados = EstablecerConsulta.executeQuery(Consulta);		
+	
+	while(TablaResultados.next()) {
+		
+		Seguro unSeguro = new Seguro();
+		TipoSeguro unTipoSeguro = new TipoSeguro();
+		
+		unSeguro.setIdSeguro(TablaResultados.getInt("idSeguro"));
+		unSeguro.setDescripcion(TablaResultados.getString("seguros.descripcion"));
+		unTipoSeguro.setIdTipo(TablaResultados.getInt("TipoSeguros.idTipo"));
+		unTipoSeguro.setDescripcion(TablaResultados.getString("TipoSeguros.descripcion"));
+		unSeguro.setTipoSeguro(unTipoSeguro);
+		unSeguro.setCostoContratacion(TablaResultados.getDouble("costoContratacion"));
+		unSeguro.setCostoAsegurado(TablaResultados.getDouble("costoAsegurado"));
+		ListadoSeguros.add(unSeguro);
+	}
+	
+return ListadoSeguros;
+
+}
+	
 }

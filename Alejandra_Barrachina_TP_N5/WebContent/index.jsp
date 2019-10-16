@@ -11,6 +11,7 @@
 <meta charset="ISO-8859-1">
 <title>Trabajo Práctico Nº5</title>
 <link rel="stylesheet" type="text/css" href="estilos.css">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:600&display=swap" rel="stylesheet">
 </head>
 <body>
 	<nav>
@@ -25,9 +26,8 @@
 	
 		ArrayList <String> Listado = new ArrayList<String>();
 		SeguroDAO unSeguro = new SeguroDAO();
-		Listado = unSeguro.ListadoTipoSeguro();
-		JOptionPane.showMessageDialog(null, Listado);
-				
+		Listado = unSeguro.ListadoTipoSeguro();			
 	%>
+	<img src="seguros.jpg.jpg" alt="tiposdeSeguros">
 </body>
 </html>

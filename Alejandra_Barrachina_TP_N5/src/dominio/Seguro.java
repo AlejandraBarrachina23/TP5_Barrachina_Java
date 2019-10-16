@@ -4,7 +4,7 @@ public class Seguro {
 
 	private int idSeguro;
 	private String descripcion;
-	private int idTipo;
+	private TipoSeguro tipoSeguro;
 	private double costoContratacion;
 	private double costoAsegurado;
 	
@@ -20,11 +20,11 @@ public class Seguro {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public int getIdTipo() {
-		return idTipo;
+	public TipoSeguro getTipoSeguro() {
+		return tipoSeguro;
 	}
-	public void setIdTipo(int idTipo) {
-		this.idTipo = idTipo;
+	public void setTipoSeguro(TipoSeguro tipoSeguro) {
+		this.tipoSeguro = tipoSeguro;
 	}
 	public double getCostoContratacion() {
 		return costoContratacion;

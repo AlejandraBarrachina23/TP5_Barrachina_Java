@@ -1,5 +1,18 @@
 @charset "ISO-8859-1";
 
+*{
+	
+	margin:0px;
+	padding:0px;
+
+}
+
+body{
+	
+	font-family: 'Quicksand', sans-serif;
+	background-color:#f3f3f3;
+}
+
 a {
 	
 	text-decoration:none;
@@ -8,24 +21,137 @@ a {
 
 ul li {
 	
+	width:31%;
 	list-style:none;
-	width:30%;
 	padding:10px;
-	display:block;
 	float:left;
 	clear:right;
-	background-color:pink;
+	background-color: #32928F;
 	text-align:center;
 	
 }
 
+
 nav {
 	
 	width:100%;
-	
+	height:40px;
+	background-color: #32928F;
 }
 
 h1{
 	
 	text-align:center;
+}
+
+.content-table{
+	
+	border-collapse:collapse;
+	margin:25px 0;
+	font-size:0.9em;
+	width:100%;
+	min-width:600px;
+	box-shadow: 7px 9px 23px -13px rgba(0,0,0,0.93);
+	
+}
+
+.content-table th {
+	
+	background-color:#32928F;
+	color:white;
+	font-weight: 600;
+	padding:15px;
+	
+}
+
+.content-table tr,
+.content-table td {
+	
+	padding:15px 12px;
+}
+
+.content-table td {
+	
+	border-bottom: 1px solid #dddddd;
+	
+}
+
+.content-table tr:nth-of-type(even) {
+	
+	background-color:#f3f3f3;
+
+}
+
+.content-table tr:last-of-type {
+	
+	border-bottom: 3px solid #32928F;
+	
+}
+
+.content-filter {
+	
+	background-color:#f3f3f3;
+	width:100%;
+	text-align:center;
+	padding:15px;
+	
+}
+
+.agregar-seguro{
+	
+	padding: 20px;
+	text-align:center;
+	width: 20%;
+	margin:0 auto;
+	background-color: white;
+	box-shadow: 7px 9px 23px -13px rgba(0,0,0,0.93);
+
+}
+
+.form-item {
+	
+	margin:15px;
+	backgroun-color:blue;
+	
+}
+
+input {
+	
+	width:150px;
+	padding:5px;
+	
+}
+
+select {
+	
+	width:150px;
+	padding:5px;
+	
+}
+
+.button {
+	
+	background-color: #32928F;
+	color:white;
+	border-style:none;
+	font-family: 'Quicksand', sans-serif;
+	font-weight:600;
+	box-shadow: 7px 9px 23px -13px rgba(0,0,0,0.93);
+	border-radius: 38px 38px 38px 38px;
+	border: 0px solid #000000;
+	
+}
+
+.button:hover {
+	
+	background-color:#2B998B;
+	
+}
+
+img {
+
+	margin:10px auto;
+	display:block;
+    
+	
 }

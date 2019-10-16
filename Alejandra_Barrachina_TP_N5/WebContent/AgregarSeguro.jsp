@@ -8,28 +8,51 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="estilos.css">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:600&display=swap" rel="stylesheet">
 </head>
 <body>
+<nav>
+		<ul>
+			<li><a href="index.jsp">Inicio</a></li>
+			<li><a href="AgregarSeguro.jsp">Agregar Seguro</a></li>
+			<li><a href="ListarSeguros.jsp">Listar Seguros</a></li>
+		</ul>
+</nav>
 
-<h1>Agregar Usuario</h1>
+<h1>Agregar Seguro</h1><br>
 
-<form method="post" action="ServletSeguro">
+<form class="agregar-seguro" method="post" action="ServletSeguro">
 	
-	<label>Id Seguro</label><br> <%%>
-	<label>Descripción  </label><input type="text" name="tboxDescripcion"><br>
-	<label>Tipo de Seguro </label><br>
-	<select name="TipoSeguro">
-		<%
-		SeguroDAO unSeguro = new SeguroDAO();
-		for(TipoSeguro unTipoSeguro : unSeguro.ListarTipoSeguro()){
-		%>	
-			<option value="<%=unTipoSeguro.getIdTipo()%>"><%=unTipoSeguro.getDescripcion()%></option><%
-		}
-		%>
-	</select>
-	<label>Costo de Contratación  </label><input type="text" name="tboxCostoContratacion"><br>
-	<label>Costo máximo asegurado  </label><input type="text" name="tboxCostoMaximo"><br>
-	<input type="submit" value="Aceptar" name="btnAceptar">
+	<div class="form-item">
+		<label>Id Seguro: <% SeguroDAO unSeguro = new SeguroDAO();%> <%=unSeguro.NuevoId()%></label><br>
+	</div>
+	<div class="form-item">
+		<label>Descripción  </label><br><input type="text" required name="tboxDescripcion" requer><br>
+	</div>
+	<div class="form-item">
+		<label>Tipo de Seguro </label><br>
+		<select name="TipoSeguro">
+			<%
+		
+			for(TipoSeguro unTipoSeguro : unSeguro.ListarTipoSeguro()){
+			%>	
+				<option value="<%=unTipoSeguro.getIdTipo()%>"><%=unTipoSeguro.getDescripcion()%></option><%
+			}
+			%>
+			
+		</select>
+	</div>
+	<div class="form-item">
+		<label>Costo de Contratación  </label><br><input type="number" required name="tboxCostoContratacion"><br>
+	</div>
+	<div class="form-item">
+		<label>Costo máximo asegurado  </label><br><input type="number" required name="tboxCostoMaximo"><br>
+	</div>
+	<div class="form-item">
+		<input class="button" type="submit" value="ACEPTAR" name="btnAceptar">
+	</div>
 	</form>
+	<img src="seguros.jpg.jpg" alt="tiposdeSeguros">
 </body>
 </html>
